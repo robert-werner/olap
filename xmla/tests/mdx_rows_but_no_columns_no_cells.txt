@@ -1,3 +1,0 @@
-select {} on columns,
-      [Geschlecht].[Geschlecht].[Level 01].ALLMEMBERS on rows
-from [fused]

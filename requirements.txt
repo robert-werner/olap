@@ -1,0 +1,6 @@
+setuptools~=60.2.0
+zope.component
+cornice
+webob
+venusian
+zeep==3.4.0

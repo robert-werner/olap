@@ -1,2 +1,0 @@
--- newer versions of mondrian now return a sliceraxis
-select from [Sales]

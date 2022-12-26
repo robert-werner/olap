@@ -1,4 +1,4 @@
-olap.xmla
+olap
 =========
 This package is meant for accessing xmla datasources - see http://en.wikipedia.org/wiki/XML_for_Analysis
 
@@ -11,20 +11,14 @@ In your workdir run:
     python3 -m venv xyz
     cd xyz
     source bin/activate
-    git clone https://github.com/may-day/olap
-    cd olap/xmla
+    git clone https://github.com/robert-werner/olap
+    cd olap
     # optional if you have it already
     pip install pipenv
     pipenv install -dev
     python setup.py develop
     # now you should be good to go
 
-
-
-Testing
--
-
-See [HOWTO](xmla/HOWTO.md)
 
 Example
 -
