@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 with open('requirements.txt') as f:
     required = f.read().splitlines()
@@ -10,7 +10,7 @@ setup(name='olap',
       description='Interface to OLAP DBs',
       author='Leonid Kolesnichenko (original author: Norman Krämer)',
       author_email='xperience439@gmail.com',
-      packages=['olap'],
+      packages=find_packages(),
       namespace_packages=['olap'],
       package_dir={'olap': 'olap'},
       install_requires=required,
