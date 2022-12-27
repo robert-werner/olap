@@ -1,27 +1,15 @@
-olap
+olap3
 =========
-This package is meant for accessing xmla datasources - see http://en.wikipedia.org/wiki/XML_for_Analysis
+This package is meant for accessing XMLA datasources (Pentaho and etc.) - see http://en.wikipedia.org/wiki/XML_for_Analysis
 
-Example to set up a develop environment
--
+Derived from old and unsupported [may-day/olap](https://github.com/may-day/olap.git)
 
-In your workdir run:
-
-    # create virtualenv 
-    python3 -m venv xyz
-    cd xyz
-    source bin/activate
-    git clone https://github.com/robert-werner/olap
-    cd olap
-    # optional if you have it already
-    pip install pipenv
-    pipenv install -dev
-    python setup.py develop
-    # now you should be good to go
-
+Now you may install olap3 just with `python setup.py install` (in GitHub repository folder) or with `pip install olap3` without the hassle of installing [xmla](https://pypi.org/project/xmla/) separately
 
 Example
 -
+
+_You may use olap3 as drop-in replacement of olap package, no changes of existing code are needed._
 
 Here is an example how to use it:
 
@@ -32,7 +20,7 @@ Here is an example how to use it:
     # mondrian
     c = p.connect(location="http://localhost:8080/mondrian/xmla")
 
-    # or ssas - note that thhis needs setup on an iis
+    # or ssas - note that this needs setup on an iis
     # also you'll probably need to authenticate using kerberos
     # from requests_kerberos import HTTPKerberosAuth
     # c = p.connect(location="https://my-as-server/olap/msmdpump.dll", 
