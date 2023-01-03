@@ -1,14 +1,11 @@
 import asyncio
 
-import httpx
 import six
-import zeep
 from async_class import AsyncClass
 from six import u
 from zeep import Transport, Plugin, Client
 from zeep.exceptions import Fault
 
-import olap3
 from olap3.abstract.connection import Connection
 from olap3.abstract.provider import Provider
 from olap3.abstract.schema_elements import OLAPSchemaElement
@@ -580,15 +577,11 @@ class AsyncXMLASource(AsyncXMLAConnection, AsyncXMLAClass):
                                             aslist=unique_name == None)
 
 
-async def provider():
+XMLAConnection.setupMembers()
+
+
+async def setup_async_provider():
     await AsyncXMLAConnection().setupMembers()
 
-    p = await AsyncXMLAProvider()
-    c = await p.connect(location="http://localhost:25880/pentaho/Xmla?userid=Admin&password=root")
-    ds = await c.getOLAPSource()
-    cs = await ds.getCatalog("AisKPI")
-    cus = await cs.getCube("GosPay")
-    print(cus.query())
 
-
-asyncio.get_event_loop().run_until_complete(provider())
+asyncio.get_event_loop().run_until_complete(setup_async_provider())
