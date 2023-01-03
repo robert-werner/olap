@@ -1,79 +1,6 @@
-'''
-Created on 18.04.2012
+from abc import abstractmethod
 
-@author: norman
-'''
-# @PydevCodeAnalysisIgnore
-
-import zope.schema
-
-# from olap import xmla
-import olap.interfaces as ooi
-from .utils import u
-
-
-class XMLAException(ooi.OlapException):
-    pass
-
-
-class SchemaElementNotFound(Exception):
-    def __init__(self, restrictions, properties):
-        super(SchemaElementNotFound, self).__init__()
-        self.restrictions = restrictions
-        self.properties = properties
-
-
-class IXMLASource(ooi.IOLAPSource):
-    urlwsdl = zope.schema.TextLine(
-        title=u("WSDL URL"),
-        description=u("URL of wsdl defining the XMLA service, leave empty to use default."),
-        required=False
-    )
-
-    location = zope.schema.TextLine(
-        title=u("XMLA Server location"),
-        description=u("URL of this XMLA Server"),
-        required=True
-    )
-
-    sslverify = zope.schema.TextLine(
-        title=u("sslverify"),
-        description=u("""Verify ssl certificate on ssl connections. 
-Leave empty to accept any certifacte or point to a file on this server 
-containing a certicate bundle"""),
-        required=False
-    )
-
-    log = zope.schema.TextLine(
-        title=u("log"),
-        description=u("""Provide your own instance of a Zeep logging plugin or set to True to use builtin"""),
-        required=False
-    )
-
-    session = zope.schema.TextLine(
-        title=u("session"),
-        description=u("""Provide your own session instance to zeep's transport"""),
-        required=False
-    )
-
-    def getSchemaElements(schemaElementType, unique_name,
-                          aslist=False, more_restrictions=None,
-                          more_properties=None,
-                          generate_instance=True):
-        """Returns a list of schema elements or a single entry.
-
-        schemaElementType: refers to a key in `schemaElementTypes`
-        unique_name: return a specific element
-        aslist: return result as list, if false the first in the resultset will be returned
-        more_restrictions: dictionary containing more constraints for the request, i.e.
-                           {"HIERARCHY_UNIQUE_NAME":"[Sales by Country]"}
-        more_properties: dictionary containing more properties for the request,
-                           {"ProviderInfo":"YourProvider"}
-        generate_instance: If false the resulting entries will be dictionaries, otherwise
-                           of the type mentioned in the "ELEMENT_CLASS" entry 
-                           from the schemaELementType.
-                           """
-
+from olap3.abstract.olap_source import OLAPSource
 
 schemaElementTypes = {
     "CATALOG": {"RESTRICTION_NAME": "CATALOG_NAME",
@@ -168,3 +95,15 @@ schemaElementTypes = {
                  "RESTRICT_ON": ["CUBE", "HIERARCHY", "LEVEL"]}
 
 }
+
+
+class XMLASource(OLAPSource):
+
+    @staticmethod
+    @abstractmethod
+    def getSchemaElements(schemaElementType, unique_name,
+                          aslist=False, more_restrictions=None,
+                          more_properties=None,
+                          generate_instance=True):
+        ...
+

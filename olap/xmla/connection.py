@@ -50,7 +50,6 @@ class SessionPlugin(Plugin):
         self.xmlaconn = xmlaconn
 
     def ingress(self, envelope, http_headers, operation):
-        # print(etree_tostring(envelope))
         if self.xmlaconn.getListenOnSessionId():
             nsmap = {'se': schema_soap_env,
                      'xmla': schema_xmla}
@@ -101,8 +100,6 @@ class XMLAConnection(object):
             cls.addMethod(mname, getFunc(schemaName))
 
     def __init__(self, url, location, sslverify, **kwargs):
-
-
         if "session" in kwargs:
             session = kwargs["session"]
             del kwargs["session"]
